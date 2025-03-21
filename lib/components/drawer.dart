@@ -12,7 +12,7 @@ class CustomDrawer extends StatelessWidget {
       Navigator.pushReplacementNamed(context, '/');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error logging out: $e')),
+        SnackBar(content: Text('Error logging out: \$e')),
       );
     }
   }
@@ -39,7 +39,20 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
           ),
-          const Spacer(),
+          ListTile(
+            leading: const Icon(Icons.info, color: Colors.white),
+            title: const Text('About', style: TextStyle(color: Colors.white)),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.local_hospital, color: Colors.white),
+            title: const Text('Symptoms', style: TextStyle(color: Colors.white)),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
