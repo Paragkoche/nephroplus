@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "40061691328",
+    "project_id": "caltech-c6063",
+    "storage_bucket": "caltech-c6063.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40061691328:android:1fb8a674813eb20b4fd425",
+        "android_client_info": {
+          "package_name": "com.example.caltech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo9_gJQyrRjmhOnnyWMwXeWUwkCINdg8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
