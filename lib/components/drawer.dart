@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nephropulse/components/about_page.dart';
+import 'package:nephropulse/components/home_page.dart';
+import 'package:nephropulse/components/symptoms_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -40,42 +43,63 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
+            leading: const Icon(Icons.home, color: Colors.white),
+            title: const Text('Home', style: TextStyle(color: Colors.white)),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
+          ),
+          ListTile(
             leading: const Icon(Icons.info, color: Colors.white),
             title: const Text('About', style: TextStyle(color: Colors.white)),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => AboutPage()),
+              );
             },
           ),
           ListTile(
             leading: const Icon(Icons.local_hospital, color: Colors.white),
-            title: const Text('Symptoms', style: TextStyle(color: Colors.white)),
+            title:
+                const Text('Symptoms', style: TextStyle(color: Colors.white)),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SymptomsPage()),
+              );
             },
           ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            child: ElevatedButton(
-              onPressed: () => _logout(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF385170),
-                padding: const EdgeInsets.symmetric(
-                    vertical: 12.0, horizontal: 40.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                elevation: 4.0,
-              ),
-              child: const Text(
-                'Logout',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+          Spacer(),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.white),
+            title: const Text('LOGOUT', style: TextStyle(color: Colors.white)),
+            onTap: () {
+              _logout(context);
+              //   ElevatedButton(
+              //   onPressed: () => ,
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: const Color(0xFF385170),
+              //     padding: const EdgeInsets.symmetric(
+              //         vertical: 12.0, horizontal: 40.0),
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(30.0),
+              //     ),
+              //     elevation: 4.0,
+              //   ),
+              //   child: const Text(
+              //     'Logout',
+              //     style: TextStyle(
+              //       color: Colors.white,
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.w600,
+              //     ),
+              //   ),
+              // )
+            },
           ),
         ],
       ),
