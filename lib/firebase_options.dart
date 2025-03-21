@@ -26,29 +26,14 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+      case TargetPlatform.linux:
       case TargetPlatform.windows:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
-      case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
+          'DefaultFirebaseOptions have not been configured for this platform.',
         );
       default:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions are not supported for this platform.',
-        );
+        return web;
     }
   }
 
@@ -59,5 +44,12 @@ class DefaultFirebaseOptions {
     projectId: 'caltech-c6063',
     storageBucket: 'caltech-c6063.firebasestorage.app',
   );
-
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBo9_gJQyrRjmhOnnyWMwXeWUwkCINdg8Q',
+    appId: '1:40061691328:web:your-web-app-id',
+    messagingSenderId: '40061691328',
+    projectId: 'caltech-c6063',
+    authDomain: 'caltech-c6063.firebaseapp.com', // ✅ Add authDomain
+    storageBucket: 'caltech-c6063.appspot.com',
+  );
 }
