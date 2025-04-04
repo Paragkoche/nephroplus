@@ -1,10 +1,3 @@
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:2222012000.
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:3775955048.
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:3831674626.
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:4082341356.
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:1850940146.
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:2179190841.
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:1695780299.
 import 'dart:convert';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:http/http.dart' as http;
@@ -29,7 +22,7 @@ class _HomePageState extends State<HomePage>
 
   int _currentStep = 0;
   final HealthData _data = HealthData(
-                          age: 0,
+    age: 0,
     gender: '',
     ethnicity: '',
     socioeconomicStatus: 0,
@@ -80,9 +73,7 @@ class _HomePageState extends State<HomePage>
     qualityOfLifeScore: 0,
     nsaisUse: 0,
     antidiabeticMedications: 0,
-                       
-
-);
+  );
   String _logRegPrediction = '';
   String _randForestPrediction = '';
   String _gradBoostPrediction = '';
@@ -374,7 +365,9 @@ class _HomePageState extends State<HomePage>
                     ],
                     onSelected: (int? value) {
                       _data.familyHistoryHypertension = value!;
-                    },),),
+                    },
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: DropdownMenu<int>(
@@ -386,8 +379,8 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.familyHistoryDiabetes = value!;
-                      }
-                ),)
+                      }),
+                )
               ],
             ),
           ),
@@ -412,12 +405,11 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.previousAcuteKidneyInjury = value!;
-                      }
-                      ),
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child:DropdownMenu<int>(
+                  child: DropdownMenu<int>(
                       width: 300,
                       label: const Text("Urinary Tract Infections "),
                       dropdownMenuEntries: const [
@@ -425,19 +417,17 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                //     validator: RequiredValidator(
-                //         errorText: "invalid medical history input"),
-                //     keyboardType: TextInputType.number,
-                //     onChange: (value) {
-                //       _data.urinaryTractInfections = int.parse(value);
-                //     },
-                //     disable: false,
-                //   ),
+                        //     validator: RequiredValidator(
+                        //         errorText: "invalid medical history input"),
+                        //     keyboardType: TextInputType.number,
+                        //     onChange: (value) {
+                        //       _data.urinaryTractInfections = int.parse(value);
+                        //     },
+                        //     disable: false,
+                        //   ),
                         _data.urinaryTractInfections = value!;
-                      }
-                      ),
+                      }),
                 ),
-                
               ],
             ),
           ),
@@ -531,8 +521,8 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.aceInhibitors = value!;
-                      }
-                ),),
+                      }),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: DropdownMenu<int>(
@@ -585,8 +575,7 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.heavyMetalsExposure = value!;
-                      }
-                      ),
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -599,8 +588,7 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.occupationalExposureChemicals = value!;
-                      }
-                      ),
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -613,8 +601,7 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.waterQuality = value!;
-                      }
-                      ),
+                      }),
                 ),
               ],
             ),
@@ -654,8 +641,7 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.medicationAdherence = value!;
-                      }
-                      ),
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -668,8 +654,7 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.healthLiteracy = value!;
-                      }
-                      ),
+                      }),
                 ),
               ],
             ),
@@ -696,7 +681,7 @@ class _HomePageState extends State<HomePage>
                     onSelected: (int? value) {
                       _data.edema = value!;
                     },
-                ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -723,12 +708,11 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.nauseaVomiting = value!;
-                      }
-                      ),
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                   child: DropdownMenu<int>(
+                  child: DropdownMenu<int>(
                       width: 300,
                       label: const Text("Muscle Cramps"),
                       dropdownMenuEntries: const [
@@ -737,10 +721,9 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.muscleCramps = value!;
-                      }
-                      ),
+                      }),
                 ),
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: DropdownMenu<int>(
                       width: 300,
@@ -751,8 +734,7 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.itching = value!;
-                      }
-                      ),
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -781,7 +763,7 @@ class _HomePageState extends State<HomePage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: DropdownMenu<int>(
                       width: 300,
@@ -792,8 +774,7 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.nsaisUse = value!;
-                      }
-                      ),
+                      }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -806,8 +787,7 @@ class _HomePageState extends State<HomePage>
                       ],
                       onSelected: (int? value) {
                         _data.antidiabeticMedications = value!;
-                      }
-                      ),
+                      }),
                 ),
               ],
             ),
@@ -816,5 +796,4 @@ class _HomePageState extends State<HomePage>
       ),
     ];
   }
-
 }
