@@ -79,12 +79,13 @@ class _HomePageState extends State<HomePage>
   String _gradBoostPrediction = '';
 
   Future<void> _predict() async {
+    debugPrint("server...");
     final url = Uri.parse('https://backend-cdk.onrender.com/predict');
 
     final response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
-      body: _data.toJson(),
+      body: jsonEncode(_data.toJson()),
     );
 
     if (response.statusCode == 200) {

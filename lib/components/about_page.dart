@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nephropulse/components/drawer.dart';
 
 class AboutPage extends StatefulWidget {
+  const AboutPage({super.key});
+
   @override
   _AboutPageState createState() => _AboutPageState();
 }
