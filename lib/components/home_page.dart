@@ -1,3 +1,4 @@
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:1695780299.
 import 'dart:convert';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:http/http.dart' as http;
@@ -12,8 +13,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
@@ -24,119 +24,64 @@ class _HomePageState extends State<HomePage>
   int _currentStep = 0;
   final HealthData _data = HealthData(
     age: 0,
+    ethnicity: "",
     gender: '',
-    ethnicity: '',
-    socioeconomicStatus: 0,
-    educationLevel: 0,
     bmi: 0.0,
-    smoking: 0,
-    alcoholConsumption: 0,
-    physicalActivity: 0,
-    dietQuality: 0,
-    sleepQuality: 0,
     familyHistoryKidneyDisease: 0,
     familyHistoryHypertension: 0,
     familyHistoryDiabetes: 0,
     previousAcuteKidneyInjury: 0,
-    urinaryTractInfections: 0,
     systolicBP: 0,
     diastolicBP: 0,
     fastingBloodSugar: 0,
     hba1c: 0.0,
     serumCreatinine: 0.0,
-    bunLevels: 0,
     gfr: 0,
     proteinInUrine: 0,
-    acr: 0,
-    serumElectrolytesSodium: 0,
-    serumElectrolytesPotassium: 0.0,
-    serumElectrolytesCalcium: 0.0,
-    serumElectrolytesPhosphorus: 0.0,
     hemoglobinLevels: 0.0,
-    cholesterolTotal: 0,
     cholesterolLDL: 0,
     cholesterolHDL: 0,
-    cholesterolTriglycerides: 0,
     aceInhibitors: 0,
     diuretics: 0,
     statins: 0,
-    heavyMetalsExposure: 0,
-    occupationalExposureChemicals: 0,
-    waterQuality: 0,
-    medicalCheckupsFrequency: 0,
-    medicationAdherence: 0,
-    healthLiteracy: 0,
     edema: 0,
     fatigueLevels: 0,
-    nauseaVomiting: 0,
-    muscleCramps: 0,
-    itching: 0,
     qualityOfLifeScore: 0,
-    nsaisUse: 0,
-    antidiabeticMedications: 0,
   );
   String _logRegPrediction = '';
   String _randForestPrediction = '';
   String _gradBoostPrediction = '';
 
   Future<void> _predict() async {
-    final url = Uri.parse('http://192.168.29.211:8000/predict');
+    final url = Uri.parse('https://backend-cdk.onrender.com/predict');
 
     final response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({
-        "Age": _data.age,
+        "age": _data.age,
         "gender": _data.gender,
-        "ethnicity": _data.ethnicity,
-        "socioeconomicStatus": _data.socioeconomicStatus,
-        "educationLevel": _data.educationLevel,
         "BMI": _data.bmi,
-        "Smoking": _data.smoking,
-        "AlcoholConsumption": _data.alcoholConsumption,
-        "PhysicalActivity": _data.physicalActivity,
-        "DietQuality": _data.dietQuality,
-        "SleepQuality": _data.sleepQuality,
         "familyHistoryKidneyDisease": _data.familyHistoryKidneyDisease,
         "familyHistoryHypertension": _data.familyHistoryHypertension,
         "familyHistoryDiabetes": _data.familyHistoryDiabetes,
         "previousAcuteKidneyInjury": _data.previousAcuteKidneyInjury,
-        "urinaryTractInfections": _data.urinaryTractInfections,
         "SystolicBP": _data.systolicBP,
         "DiastolicBP": _data.diastolicBP,
         "FastingBloodSugar": _data.fastingBloodSugar,
         "Hba1c": _data.hba1c,
         "SerumCreatinine": _data.serumCreatinine,
-        "BUNLevels": _data.bunLevels,
         "GFR": _data.gfr,
         "ProteinInUrine": _data.proteinInUrine,
-        "ACR": _data.acr,
-        "SerumElectrolytesSodium": _data.serumElectrolytesSodium,
-        "SerumElectrolytesPotassium": _data.serumElectrolytesPotassium,
-        "SerumElectrolytesCalcium": _data.serumElectrolytesCalcium,
-        "SerumElectrolytesPhosphorus": _data.serumElectrolytesPhosphorus,
         "HemoglobinLevels": _data.hemoglobinLevels,
-        "CholesterolTotal": _data.cholesterolTotal,
         "CholesterolLDL": _data.cholesterolLDL,
         "CholesterolHDL": _data.cholesterolHDL,
-        "CholesterolTriglycerides": _data.cholesterolTriglycerides,
         "aceInhibitors": _data.aceInhibitors,
         "diuretics": _data.diuretics,
         "statins": _data.statins,
-        "heavyMetalsExposure": _data.heavyMetalsExposure,
-        "occupationalExposureChemicals": _data.occupationalExposureChemicals,
-        "waterQuality": _data.waterQuality,
-        "MedicalCheckupsFrequency": _data.medicalCheckupsFrequency,
-        "MedicationAdherence": _data.medicationAdherence,
-        "HealthLiteracy": _data.healthLiteracy,
         "Edema": _data.edema,
         "FatigueLevels": _data.fatigueLevels,
-        "NauseaVomiting": _data.nauseaVomiting,
-        "MuscleCramps": _data.muscleCramps,
-        "Itching": _data.itching,
         "QualityOfLifeScore": _data.qualityOfLifeScore,
-        "nsaisUse": _data.nsaisUse,
-        "antidiabeticMedications": _data.antidiabeticMedications,
       }),
     );
 
@@ -161,6 +106,7 @@ class _HomePageState extends State<HomePage>
         ),
       );
     } else {
+      debugPrint(response.body);
       showDialog(
         // ignore: use_build_context_synchronously
         context: context,
@@ -351,34 +297,34 @@ class _HomePageState extends State<HomePage>
                     disable: false,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Smoking (cigarettes/day)",
-                    icons: const Icon(Icons.smoke_free),
-                    validator:
-                        RequiredValidator(errorText: "invalid smoking count"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.smoking = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Alcohol Consumption (units/week)",
-                    icons: const Icon(Icons.local_bar),
-                    validator: RequiredValidator(
-                        errorText: "invalid alcohol consumption"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.alcoholConsumption = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Smoking (cigarettes/day)",
+                //     icons: const Icon(Icons.smoke_free),
+                //     validator:
+                //         RequiredValidator(errorText: "invalid smoking count"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.smoking = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Alcohol Consumption (units/week)",
+                //     icons: const Icon(Icons.local_bar),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid alcohol consumption"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.alcoholConsumption = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -394,45 +340,60 @@ class _HomePageState extends State<HomePage>
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Family History of Kidney Disease (0/1)",
-                    icons: const Icon(Icons.family_restroom),
-                    validator: RequiredValidator(
-                        errorText: "invalid family history input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.familyHistoryKidneyDisease = int.parse(value);
+                  child: DropdownMenu<int>(
+                    width: 300,
+                    label: const Text("Family History of Kidney Disease"),
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                      DropdownMenuEntry<int>(value: 0, label: "No"),
+                    ],
+                    onSelected: (int? value) {
+                      _data.familyHistoryKidneyDisease = value!;
                     },
-                    disable: false,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Family History of Hypertension (0/1)",
-                    icons: const Icon(Icons.family_restroom),
-                    validator: RequiredValidator(
-                        errorText: "invalid family history input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.familyHistoryHypertension = int.parse(value);
+                  child: DropdownMenu<int>(
+                    width: 300,
+                    label: const Text("Family History of Hypertension"),
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                      DropdownMenuEntry<int>(value: 0, label: "No"),
+                    ],
+                    onSelected: (int? value) {
+                      _data.familyHistoryHypertension = value!;
                     },
-                    disable: false,
+                    // icons: const Icon(Icons.family_restroom),
+                    // validator: RequiredValidator(
+                    //     errorText: "invalid family history input"),
+                    // keyboardType: TextInputType.number,
+                    // onChange: (value) {
+                    //   _data.familyHistoryHypertension = int.parse(value);
+                    // },
+                    // disable: false,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Family History of Diabetes (0/1)",
-                    icons: const Icon(Icons.family_restroom),
-                    validator: RequiredValidator(
-                        errorText: "invalid family history input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.familyHistoryDiabetes = int.parse(value);
-                    },
-                    disable: false,
-                  ),
+                  child: DropdownMenu<int>(
+                      width: 300,
+                      label: const Text("Family History of Diabetes"),
+                      dropdownMenuEntries: const [
+                        DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                        DropdownMenuEntry<int>(value: 0, label: "No"),
+                      ],
+                      onSelected: (int? value) {
+                        _data.familyHistoryDiabetes = value!;
+                      }
+                      // validator: RequiredValidator(
+                      //     errorText: "invalid family history input"),
+                      // keyboardType: TextInputType.number,
+                      // onChange: (value) {
+                      //   _data.familyHistoryDiabetes = int.parse(value);
+                      // },
+                      // disable: false,
+                      ),
                 ),
               ],
             ),
@@ -449,32 +410,39 @@ class _HomePageState extends State<HomePage>
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Previous Acute Kidney Injury (0/1)",
-                    icons: const Icon(Icons.medical_services),
-                    validator: RequiredValidator(
-                        errorText: "invalid medical history input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.previousAcuteKidneyInjury = int.parse(value);
-                    },
-                    disable: false,
-                  ),
+                  child: DropdownMenu<int>(
+                      width: 300,
+                      label: const Text("Previous Acute Kidney Injury"),
+                      dropdownMenuEntries: const [
+                        DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                        DropdownMenuEntry<int>(value: 0, label: "No"),
+                      ],
+                      onSelected: (int? value) {
+                        _data.previousAcuteKidneyInjury = value!;
+                      }
+                      // validator: RequiredValidator(
+                      //     errorText: "invalid medical history input"),
+                      // keyboardType: TextInputType.number,
+                      // onChange: (value) {
+                      //   _data.previousAcuteKidneyInjury = int.parse(value);
+                      // },
+                      // disable: false,
+                      ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Urinary Tract Infections (0/1)",
-                    icons: const Icon(Icons.medical_services),
-                    validator: RequiredValidator(
-                        errorText: "invalid medical history input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.urinaryTractInfections = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Urinary Tract Infections (0/1)",
+                //     icons: const Icon(Icons.medical_services),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid medical history input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.urinaryTractInfections = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -559,44 +527,51 @@ class _HomePageState extends State<HomePage>
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "ACE Inhibitors (0/1)",
-                    icons: const Icon(Icons.medical_services),
-                    validator: RequiredValidator(
-                        errorText: "invalid ACE inhibitors input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.aceInhibitors = int.parse(value);
+                  child: DropdownMenu<int>(
+                      width: 300,
+                      label: const Text("ACE Inhibitors"),
+                      dropdownMenuEntries: const [
+                        DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                        DropdownMenuEntry<int>(value: 0, label: "No"),
+                      ],
+                      onSelected: (int? value) {
+                        _data.aceInhibitors = value!;
+                      }
+                      // validator: RequiredValidator(
+                      //     errorText: "invalid ACE inhibitors input"),
+                      // keyboardType: TextInputType.number,
+                      // onChange: (value) {
+                      //   _data.aceInhibitors = int.parse(value);
+                      // },
+                      // disable: false,
+                      ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: DropdownMenu<int>(
+                    width: 300,
+                    label: const Text("Diuretics"),
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                      DropdownMenuEntry<int>(value: 0, label: "No"),
+                    ],
+                    onSelected: (int? value) {
+                      _data.diuretics = value!;
                     },
-                    disable: false,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Diuretics (0/1)",
-                    icons: const Icon(Icons.medical_services),
-                    validator:
-                        RequiredValidator(errorText: "invalid diuretics input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.diuretics = int.parse(value);
+                  child: DropdownMenu<int>(
+                    width: 300,
+                    label: const Text("Statins"),
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                      DropdownMenuEntry<int>(value: 0, label: "No"),
+                    ],
+                    onSelected: (int? value) {
+                      _data.statins = value!;
                     },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Statins (0/1)",
-                    icons: const Icon(Icons.medical_services),
-                    validator:
-                        RequiredValidator(errorText: "invalid statins input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.statins = int.parse(value);
-                    },
-                    disable: false,
                   ),
                 ),
               ],
@@ -612,48 +587,48 @@ class _HomePageState extends State<HomePage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Heavy Metals Exposure (0/1)",
-                    icons: const Icon(Icons.exposure),
-                    validator: RequiredValidator(
-                        errorText: "invalid heavy metals exposure input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.heavyMetalsExposure = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Occupational Exposure to Chemicals (0/1)",
-                    icons: const Icon(Icons.work),
-                    validator: RequiredValidator(
-                        errorText: "invalid occupational exposure input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.occupationalExposureChemicals = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Water Quality (0/1)",
-                    icons: const Icon(Icons.water),
-                    validator: RequiredValidator(
-                        errorText: "invalid water quality input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.waterQuality = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Heavy Metals Exposure (0/1)",
+                //     icons: const Icon(Icons.exposure),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid heavy metals exposure input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.heavyMetalsExposure = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Occupational Exposure to Chemicals (0/1)",
+                //     icons: const Icon(Icons.work),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid occupational exposure input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.occupationalExposureChemicals = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Water Quality (0/1)",
+                //     icons: const Icon(Icons.water),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid water quality input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.waterQuality = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -667,48 +642,48 @@ class _HomePageState extends State<HomePage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Medical Checkups Frequency",
-                    icons: const Icon(Icons.access_time),
-                    validator: RequiredValidator(
-                        errorText: "invalid checkups frequency"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.medicalCheckupsFrequency = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Medication Adherence (0/1)",
-                    icons: const Icon(Icons.medication),
-                    validator: RequiredValidator(
-                        errorText: "invalid medication adherence input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.medicationAdherence = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Health Literacy (0/1)",
-                    icons: const Icon(Icons.school),
-                    validator: RequiredValidator(
-                        errorText: "invalid health literacy input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.healthLiteracy = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Medical Checkups Frequency",
+                //     icons: const Icon(Icons.access_time),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid checkups frequency"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.medicalCheckupsFrequency = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Medication Adherence (0/1)",
+                //     icons: const Icon(Icons.medication),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid medication adherence input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.medicationAdherence = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Health Literacy (0/1)",
+                //     icons: const Icon(Icons.school),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid health literacy input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.healthLiteracy = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -724,74 +699,81 @@ class _HomePageState extends State<HomePage>
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Edema (0/1)",
-                    icons: const Icon(Icons.water_damage),
-                    validator:
-                        RequiredValidator(errorText: "invalid edema input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.edema = int.parse(value);
+                  child: DropdownMenu<int>(
+                    width: 300,
+                    label: const Text("Edema"),
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                      DropdownMenuEntry<int>(value: 0, label: "No"),
+                    ],
+                    onSelected: (int? value) {
+                      _data.edema = value!;
                     },
-                    disable: false,
+                    // validator:
+                    //     RequiredValidator(errorText: "invalid edema input"),
+                    // keyboardType: TextInputType.number,
+                    // onChange: (value) {
+                    //   _data.edema = int.parse(value);
+                    // },
+                    // disable: false,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Fatigue Levels (0/1)",
-                    icons: const Icon(Icons.battery_alert),
-                    validator: RequiredValidator(
-                        errorText: "invalid fatigue levels input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.fatigueLevels = int.parse(value);
+                  child: DropdownMenu<int>(
+                    width: 300,
+                    label: const Text("Fatigue Levels"),
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry<int>(value: 1, label: "Yes"),
+                      DropdownMenuEntry<int>(value: 0, label: "No"),
+                    ],
+                    onSelected: (int? value) {
+                      _data.fatigueLevels = value!;
                     },
-                    disable: false,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Nausea/Vomiting (0/1)",
-                    icons: const Icon(Icons.sick),
-                    validator: RequiredValidator(
-                        errorText: "invalid nausea/vomiting input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.nauseaVomiting = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Muscle Cramps (0/1)",
-                    icons: const Icon(Icons.pregnant_woman),
-                    validator: RequiredValidator(
-                        errorText: "invalid muscle cramps input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.muscleCramps = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Itching (0/1)",
-                    icons: const Icon(Icons.dry),
-                    validator:
-                        RequiredValidator(errorText: "invalid itching input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.itching = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Nausea/Vomiting (0/1)",
+                //     icons: const Icon(Icons.sick),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid nausea/vomiting input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.nauseaVomiting = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Muscle Cramps (0/1)",
+                //     icons: const Icon(Icons.pregnant_woman),
+                //     validator: RequiredValidator(
+                //         errorText: "invalid muscle cramps input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.muscleCramps = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20),
+                //   child: InputText(
+                //     label: "Itching (0/1)",
+                //     icons: const Icon(Icons.dry),
+                //     validator:
+                //         RequiredValidator(errorText: "invalid itching input"),
+                //     keyboardType: TextInputType.number,
+                //     onChange: (value) {
+                //       _data.itching = int.parse(value);
+                //     },
+                //     disable: false,
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: InputText(
@@ -811,47 +793,47 @@ class _HomePageState extends State<HomePage>
           ),
         ),
       ),
-      Step(
-        title: const Text("Medications"),
-        content: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "NSAIDs Use (0/1)",
-                    icons: const Icon(Icons.medication),
-                    validator: RequiredValidator(
-                        errorText: "invalid NSAIDs use input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.nsaisUse = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InputText(
-                    label: "Antidiabetic Medications (0/1)",
-                    icons: const Icon(Icons.medication),
-                    validator: RequiredValidator(
-                        errorText: "invalid antidiabetic medications input"),
-                    keyboardType: TextInputType.number,
-                    onChange: (value) {
-                      _data.antidiabeticMedications = int.parse(value);
-                    },
-                    disable: false,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      // Step(
+      //   title: const Text("Medications"),
+      //   content: Card(
+      //     child: Padding(
+      //       padding: const EdgeInsets.all(8.0),
+      //       child: Column(
+      //         crossAxisAlignment: CrossAxisAlignment.stretch,
+      //         children: [
+      //           Padding(
+      //             padding: const EdgeInsets.symmetric(vertical: 20),
+      //             child: InputText(
+      //               label: "NSAIDs Use (0/1)",
+      //               icons: const Icon(Icons.medication),
+      //               validator: RequiredValidator(
+      //                   errorText: "invalid NSAIDs use input"),
+      //               keyboardType: TextInputType.number,
+      //               onChange: (value) {
+      //                 _data.nsaisUse = int.parse(value);
+      //               },
+      //               disable: false,
+      //             ),
+      //           ),
+      //           Padding(
+      //             padding: const EdgeInsets.symmetric(vertical: 20),
+      //             child: InputText(
+      //               label: "Antidiabetic Medications (0/1)",
+      //               icons: const Icon(Icons.medication),
+      //               validator: RequiredValidator(
+      //                   errorText: "invalid antidiabetic medications input"),
+      //               keyboardType: TextInputType.number,
+      //               onChange: (value) {
+      //                 _data.antidiabeticMedications = int.parse(value);
+      //               },
+      //               disable: false,
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
     ];
   }
 }
