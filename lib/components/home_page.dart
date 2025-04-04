@@ -22,57 +22,57 @@ class _HomePageState extends State<HomePage>
 
   int _currentStep = 0;
   final HealthData _data = HealthData(
-    age: 0,
-    gender: '',
-    ethnicity: '',
-    socioeconomicStatus: 0,
-    educationLevel: 0,
-    bmi: 0.0,
-    smoking: 0,
-    alcoholConsumption: 0,
-    physicalActivity: 0,
-    dietQuality: 0,
-    sleepQuality: 0,
-    familyHistoryKidneyDisease: 0,
-    familyHistoryHypertension: 0,
-    familyHistoryDiabetes: 0,
-    previousAcuteKidneyInjury: 0,
-    urinaryTractInfections: 0,
-    systolicBP: 0,
-    diastolicBP: 0,
-    fastingBloodSugar: 0,
-    hba1c: 0.0,
-    serumCreatinine: 0.0,
-    bunLevels: 0,
-    gfr: 0,
-    proteinInUrine: 0,
-    acr: 0,
-    serumCalcium: 0,
-    serumPhosphorus: 0.0,
-    serumPotassium: 0.0,
-    serumSodium: 0.0,
-    hemoglobinLevels: 0.0,
-    cholesterolTotal: 0,
-    cholesterolLDL: 0,
-    cholesterolHDL: 0,
-    cholesterolTriglycerides: 0,
-    aceInhibitors: 0,
-    diuretics: 0,
-    statins: 0,
-    heavyMetalsExposure: 0,
-    occupationalExposureChemicals: 0,
-    waterQuality: 0,
-    medicalCheckupsFrequency: 0,
-    medicationAdherence: 0,
-    healthLiteracy: 0,
-    edema: 0,
-    fatigueLevels: 0,
-    nauseaVomiting: 0,
-    muscleCramps: 0,
-    itching: 0,
-    qualityOfLifeScore: 0,
-    nsaisUse: 0,
-    antidiabeticMedications: 0,
+    Age: 0,
+    Gender: '',
+    Ethnicity: '',
+    BMI: 0.0,
+    Smoking: 0,
+    AlcoholConsumption: 0,
+    FamilyHistoryKidneyDisease: 0,
+    FamilyHistoryHypertension: 0,
+    FamilyHistoryDiabetes: 0,
+    PreviousAcuteKidneyInjury: 0,
+    UrinaryTractInfections: 0,
+    SystolicBP: 0,
+    DiastolicBP: 0,
+    FastingBloodSugar: 0,
+    HbA1c: 0.0,
+    ACEInhibitors: 0,
+    Diuretics: 0,
+    Statins: 0,
+    HeavyMetalsExposure: 0,
+    OccupationalExposureChemicals: 0,
+    WaterQuality: 0,
+    MedicalCheckupsFrequency: 0,
+    MedicationAdherence: 0,
+    HealthLiteracy: 0,
+    Edema: 0,
+    FatigueLevels: 0,
+    NauseaVomiting: 0,
+    MuscleCramps: 0,
+    Itching: 0,
+    QualityOfLifeScore: 0,
+    NSAIDsUse: 0,
+    AntidiabeticMedications: 0,
+    SocioeconomicStatus: 0,
+    SleepQuality: 0,
+    PhysicalActivity: 0,
+    DietQuality: 0,
+    SerumCreatinine: 0.0,
+    EducationLevel: 0,
+    SerumElectrolytesSodium: 0.0,
+    SerumElectrolytesPotassium: 0.0,
+    SerumElectrolytesCalcium: 0.0,
+    SerumElectrolytesPhosphorus: 0.0,
+    HemoglobinLevels: 0.0,
+    CholesterolTotal: 0,
+    CholesterolLDL: 0,
+    CholesterolHDL: 0,
+    CholesterolTriglycerides: 0,
+    ACR: 0,
+    BUNLevels: 0,
+    GFR: 0,
+    ProteinInUrine: 0,
   );
   String _logRegPrediction = '';
   String _randForestPrediction = '';
@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage>
                     validator: RequiredValidator(errorText: "invalid age"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.age = int.parse(value);
+                      _data.Age = int.parse(value);
                     },
                     disable: false,
                   ),
@@ -240,13 +240,13 @@ class _HomePageState extends State<HomePage>
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: DropdownMenu<String>(
                       width: 300,
-                      initialSelection: _data.gender,
+                      initialSelection: _data.Gender,
                       label: const Text("Gender"),
                       dropdownMenuEntries: gender.map((g) {
                         return DropdownMenuEntry<String>(value: g, label: g);
                       }).toList(),
                       onSelected: (value) {
-                        _data.gender = value!;
+                        _data.Gender = value!;
                       },
                     ),
                   ),
@@ -257,7 +257,7 @@ class _HomePageState extends State<HomePage>
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: DropdownMenu<String>(
                       width: 300,
-                      initialSelection: _data.ethnicity,
+                      initialSelection: _data.Ethnicity,
                       label: const Text('Select a country'),
                       dropdownMenuEntries: dataList.map((country) {
                         return DropdownMenuEntry<String>(
@@ -267,7 +267,7 @@ class _HomePageState extends State<HomePage>
                       }).toList(),
                       onSelected: (String? newValue) {
                         setState(() {
-                          _data.ethnicity = newValue!;
+                          _data.Ethnicity = newValue!;
                         });
                       },
                     ),
@@ -294,7 +294,7 @@ class _HomePageState extends State<HomePage>
                     validator: RequiredValidator(errorText: "invalid BMI"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.bmi = double.parse(value);
+                      _data.BMI = double.parse(value);
                     },
                     disable: false,
                   ),
@@ -308,7 +308,7 @@ class _HomePageState extends State<HomePage>
                         RequiredValidator(errorText: "invalid smoking count"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.smoking = int.parse(value);
+                      _data.Smoking = int.parse(value);
                     },
                     disable: false,
                   ),
@@ -322,7 +322,7 @@ class _HomePageState extends State<HomePage>
                         errorText: "invalid alcohol consumption"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.alcoholConsumption = int.parse(value);
+                      _data.AlcoholConsumption = int.parse(value);
                     },
                     disable: false,
                   ),
@@ -350,7 +350,7 @@ class _HomePageState extends State<HomePage>
                       DropdownMenuEntry<int>(value: 0, label: "No"),
                     ],
                     onSelected: (int? value) {
-                      _data.familyHistoryKidneyDisease = value!;
+                      _data.FamilyHistoryKidneyDisease = value!;
                     },
                   ),
                 ),
@@ -364,7 +364,7 @@ class _HomePageState extends State<HomePage>
                       DropdownMenuEntry<int>(value: 0, label: "No"),
                     ],
                     onSelected: (int? value) {
-                      _data.familyHistoryHypertension = value!;
+                      _data.FamilyHistoryHypertension = value!;
                     },
                   ),
                 ),
@@ -378,7 +378,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.familyHistoryDiabetes = value!;
+                        _data.FamilyHistoryDiabetes = value!;
                       }),
                 )
               ],
@@ -404,7 +404,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.previousAcuteKidneyInjury = value!;
+                        _data.PreviousAcuteKidneyInjury = value!;
                       }),
                 ),
                 Padding(
@@ -425,7 +425,7 @@ class _HomePageState extends State<HomePage>
                         //     },
                         //     disable: false,
                         //   ),
-                        _data.urinaryTractInfections = value!;
+                        _data.UrinaryTractInfections = value!;
                       }),
                 ),
               ],
@@ -450,7 +450,7 @@ class _HomePageState extends State<HomePage>
                         errorText: "invalid systolic blood pressure"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.systolicBP = int.parse(value);
+                      _data.SystolicBP = int.parse(value);
                     },
                     disable: false,
                   ),
@@ -464,7 +464,7 @@ class _HomePageState extends State<HomePage>
                         errorText: "invalid diastolic blood pressure"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.diastolicBP = int.parse(value);
+                      _data.DiastolicBP = int.parse(value);
                     },
                     disable: false,
                   ),
@@ -478,7 +478,7 @@ class _HomePageState extends State<HomePage>
                         errorText: "invalid fasting blood sugar"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.fastingBloodSugar = int.parse(value);
+                      _data.FastingBloodSugar = int.parse(value);
                     },
                     disable: false,
                   ),
@@ -492,7 +492,7 @@ class _HomePageState extends State<HomePage>
                         RequiredValidator(errorText: "invalid HbA1c value"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.hba1c = double.parse(value);
+                      _data.HbA1c = double.parse(value);
                     },
                     disable: false,
                   ),
@@ -520,7 +520,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.aceInhibitors = value!;
+                        _data.ACEInhibitors = value!;
                       }),
                 ),
                 Padding(
@@ -533,7 +533,7 @@ class _HomePageState extends State<HomePage>
                       DropdownMenuEntry<int>(value: 0, label: "No"),
                     ],
                     onSelected: (int? value) {
-                      _data.diuretics = value!;
+                      _data.Diuretics = value!;
                     },
                   ),
                 ),
@@ -547,7 +547,7 @@ class _HomePageState extends State<HomePage>
                       DropdownMenuEntry<int>(value: 0, label: "No"),
                     ],
                     onSelected: (int? value) {
-                      _data.statins = value!;
+                      _data.Statins = value!;
                     },
                   ),
                 ),
@@ -574,7 +574,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.heavyMetalsExposure = value!;
+                        _data.HeavyMetalsExposure = value!;
                       }),
                 ),
                 Padding(
@@ -587,7 +587,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.occupationalExposureChemicals = value!;
+                        _data.OccupationalExposureChemicals = value!;
                       }),
                 ),
                 Padding(
@@ -600,7 +600,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.waterQuality = value!;
+                        _data.WaterQuality = value!;
                       }),
                 ),
               ],
@@ -625,7 +625,7 @@ class _HomePageState extends State<HomePage>
                         errorText: "invalid checkups frequency"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.medicalCheckupsFrequency = int.parse(value);
+                      _data.MedicalCheckupsFrequency = int.parse(value);
                     },
                     disable: false,
                   ),
@@ -640,7 +640,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.medicationAdherence = value!;
+                        _data.MedicationAdherence = value!;
                       }),
                 ),
                 Padding(
@@ -653,7 +653,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.healthLiteracy = value!;
+                        _data.HealthLiteracy = value!;
                       }),
                 ),
               ],
@@ -679,7 +679,7 @@ class _HomePageState extends State<HomePage>
                       DropdownMenuEntry<int>(value: 0, label: "No"),
                     ],
                     onSelected: (int? value) {
-                      _data.edema = value!;
+                      _data.Edema = value!;
                     },
                   ),
                 ),
@@ -693,7 +693,7 @@ class _HomePageState extends State<HomePage>
                       DropdownMenuEntry<int>(value: 0, label: "No"),
                     ],
                     onSelected: (int? value) {
-                      _data.fatigueLevels = value!;
+                      _data.FatigueLevels = value!;
                     },
                   ),
                 ),
@@ -707,7 +707,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.nauseaVomiting = value!;
+                        _data.NauseaVomiting = value!;
                       }),
                 ),
                 Padding(
@@ -720,7 +720,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.muscleCramps = value!;
+                        _data.MuscleCramps = value!;
                       }),
                 ),
                 Padding(
@@ -733,7 +733,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.itching = value!;
+                        _data.Itching = value!;
                       }),
                 ),
                 Padding(
@@ -745,7 +745,7 @@ class _HomePageState extends State<HomePage>
                         errorText: "invalid quality of life score"),
                     keyboardType: TextInputType.number,
                     onChange: (value) {
-                      _data.qualityOfLifeScore = int.parse(value);
+                      _data.QualityOfLifeScore = int.parse(value);
                     },
                     disable: false,
                   ),
@@ -773,7 +773,7 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.nsaisUse = value!;
+                        _data.NSAIDsUse = value!;
                       }),
                 ),
                 Padding(
@@ -786,8 +786,287 @@ class _HomePageState extends State<HomePage>
                         DropdownMenuEntry<int>(value: 0, label: "No"),
                       ],
                       onSelected: (int? value) {
-                        _data.antidiabeticMedications = value!;
+                        _data.AntidiabeticMedications = value!;
                       }),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      Step(
+        title: const Text("Additional Health Metrics"),
+        content: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Socioeconomic Status",
+                    icons: const Icon(Icons.people),
+                    validator: RequiredValidator(
+                        errorText: "invalid socioeconomic status"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.SocioeconomicStatus = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Sleep Quality",
+                    icons: const Icon(Icons.bed),
+                    validator:
+                        RequiredValidator(errorText: "invalid sleep quality"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.SleepQuality = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Physical Activity",
+                    icons: const Icon(Icons.fitness_center),
+                    validator: RequiredValidator(
+                        errorText: "invalid physical activity"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.PhysicalActivity = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Diet Quality",
+                    icons: const Icon(Icons.restaurant),
+                    validator:
+                        RequiredValidator(errorText: "invalid diet quality"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.DietQuality = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Serum Creatinine (mg/dL)",
+                    icons: const Icon(Icons.science),
+                    validator: RequiredValidator(
+                        errorText: "invalid serum creatinine"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.SerumCreatinine = double.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Education Level",
+                    icons: const Icon(Icons.school),
+                    validator:
+                        RequiredValidator(errorText: "invalid education level"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.EducationLevel = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Serum Electrolytes Sodium (mEq/L)",
+                    icons: const Icon(Icons.science),
+                    validator:
+                        RequiredValidator(errorText: "invalid sodium level"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.SerumElectrolytesSodium = double.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Serum Electrolytes Potassium (mEq/L)",
+                    icons: const Icon(Icons.science),
+                    validator:
+                        RequiredValidator(errorText: "invalid potassium level"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.SerumElectrolytesPotassium = double.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Serum Electrolytes Calcium (mg/dL)",
+                    icons: const Icon(Icons.science),
+                    validator:
+                        RequiredValidator(errorText: "invalid calcium level"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.SerumElectrolytesCalcium = double.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Serum Electrolytes Phosphorus (mg/dL)",
+                    icons: const Icon(Icons.science),
+                    validator: RequiredValidator(
+                        errorText: "invalid phosphorus level"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.SerumElectrolytesPhosphorus = double.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Hemoglobin Levels (g/dL)",
+                    icons: const Icon(Icons.bloodtype),
+                    validator: RequiredValidator(
+                        errorText: "invalid hemoglobin level"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.HemoglobinLevels = double.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Total Cholesterol (mg/dL)",
+                    icons: const Icon(Icons.monitor_heart),
+                    validator: RequiredValidator(
+                        errorText: "invalid total cholesterol"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.CholesterolTotal = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "LDL Cholesterol (mg/dL)",
+                    icons: const Icon(Icons.monitor_heart),
+                    validator:
+                        RequiredValidator(errorText: "invalid LDL cholesterol"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.CholesterolLDL = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "HDL Cholesterol (mg/dL)",
+                    icons: const Icon(Icons.monitor_heart),
+                    validator:
+                        RequiredValidator(errorText: "invalid HDL cholesterol"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.CholesterolHDL = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Triglycerides (mg/dL)",
+                    icons: const Icon(Icons.monitor_heart),
+                    validator: RequiredValidator(
+                        errorText: "invalid triglycerides level"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.CholesterolTriglycerides = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Albumin-to-Creatinine Ratio (mg/g)",
+                    icons: const Icon(Icons.science),
+                    validator:
+                        RequiredValidator(errorText: "invalid ACR value"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.ACR = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "BUN Levels (mg/dL)",
+                    icons: const Icon(Icons.science),
+                    validator:
+                        RequiredValidator(errorText: "invalid BUN levels"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.BUNLevels = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Glomerular Filtration Rate (mL/min/1.73m²)",
+                    icons: const Icon(Icons.science),
+                    validator:
+                        RequiredValidator(errorText: "invalid GFR value"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.GFR = int.parse(value);
+                    },
+                    disable: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: InputText(
+                    label: "Protein in Urine (mg/dL)",
+                    icons: const Icon(Icons.science),
+                    validator: RequiredValidator(
+                        errorText: "invalid protein in urine"),
+                    keyboardType: TextInputType.number,
+                    onChange: (value) {
+                      _data.ProteinInUrine = int.parse(value);
+                    },
+                    disable: false,
+                  ),
                 ),
               ],
             ),
