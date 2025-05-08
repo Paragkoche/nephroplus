@@ -77,8 +77,249 @@ class _HomePageState extends State<HomePage>
   String _logRegPrediction = '';
   String _randForestPrediction = '';
   String _gradBoostPrediction = '';
+  void validate(int step) {
+    bool _binary(int x) => x == 0 || x == 1;
+
+    bool _inRange(int x, int min, int max) => x >= min && x <= max;
+
+    void _validateBinary(int value, String field) {
+      if (!_binary(value)) throw ArgumentError("$field must be 0 or 1");
+    }
+
+    // Case-by-case validation
+    switch (step) {
+      case 0:
+        if (_data.Age < 0) throw ArgumentError("Age must be ≥ 0");
+        // if (_data.SocioeconomicStatus < 1 || _data.SocioeconomicStatus > 5) {
+        //   throw ArgumentError("SocioeconomicStatus must be between 1 and 5");
+        // }
+        // if (_data.EducationLevel < 1 || _data.EducationLevel > 5) {
+        //   throw ArgumentError("EducationLevel must be between 1 and 5");
+        // }
+
+        break;
+
+      case 1:
+        // Validate BMI (should be a positive double, e.g., 10–60 as a reasonable human range)
+        if (_data.BMI == null || _data.BMI <= 0 || _data.BMI > 100) {
+          throw ArgumentError(
+              "BMI must be a positive number within a realistic range (e.g., 10–100)");
+        }
+
+        // Validate Smoking (can be 0 or more cigarettes per day)
+        if (_data.Smoking == null || _data.Smoking < 0) {
+          throw ArgumentError("Smoking must be 0 or a positive integer");
+        }
+
+        // Validate Alcohol Consumption (can be 0 or more units per week)
+        if (_data.AlcoholConsumption == null || _data.AlcoholConsumption < 0) {
+          throw ArgumentError(
+              "Alcohol Consumption must be 0 or a positive integer");
+        }
+        break;
+
+      case 2:
+        _validateBinary(
+            _data.FamilyHistoryKidneyDisease, 'FamilyHistoryKidneyDisease');
+        _validateBinary(
+            _data.FamilyHistoryHypertension, 'FamilyHistoryHypertension');
+        _validateBinary(_data.FamilyHistoryDiabetes, 'FamilyHistoryDiabetes');
+        break;
+
+      case 3:
+        _validateBinary(
+            _data.PreviousAcuteKidneyInjury, 'PreviousAcuteKidneyInjury');
+        _validateBinary(_data.UrinaryTractInfections, 'UrinaryTractInfections');
+        break;
+
+      case 4:
+        if (_data.SystolicBP < 0) throw ArgumentError("SystolicBP must be ≥ 0");
+        if (_data.DiastolicBP < 0)
+          throw ArgumentError("DiastolicBP must be ≥ 0");
+        if (_data.FastingBloodSugar < 0)
+          throw ArgumentError("FastingBloodSugar must be ≥ 0");
+        if (_data.HbA1c < 0) throw ArgumentError("HbA1c must be ≥ 0");
+        // if (_data.SerumCreatinine < 0)
+        //   throw ArgumentError("SerumCreatinine must be ≥ 0");
+        // if (_data.BUNLevels < 0) throw ArgumentError("BUNLevels must be ≥ 0");
+        // if (_data.GFR < 0) throw ArgumentError("GFR must be ≥ 0");
+        // _validateBinary(_data.ProteinInUrine, 'ProteinInUrine');
+        // if (_data.ACR < 0) throw ArgumentError("ACR must be ≥ 0");
+        break;
+
+      case 5:
+        _validateBinary(_data.ACEInhibitors, 'ACEInhibitors');
+        _validateBinary(_data.Diuretics, 'Diuretics');
+        _validateBinary(_data.Statins, 'Statins');
+        break;
+
+      case 6:
+        _validateBinary(_data.HeavyMetalsExposure, 'HeavyMetalsExposure');
+        _validateBinary(_data.OccupationalExposureChemicals,
+            'OccupationalExposureChemicals');
+        if (!_inRange(_data.WaterQuality, 1, 5))
+          throw ArgumentError("WaterQuality must be 1–5");
+        // if (!_inRange(_data.MedicalCheckupsFrequency, 1, 5))
+        //   throw ArgumentError("MedicalCheckupsFrequency must be 1–5");
+        // if (!_inRange(_data.MedicationAdherence, 1, 5))
+        //   throw ArgumentError("MedicationAdherence must be 1–5");
+        // if (!_inRange(_data.HealthLiteracy, 1, 5))
+        //   throw ArgumentError("HealthLiteracy must be 1–5");
+        break;
+
+      case 7:
+        // Step 7: Checkups and Medication Adherence
+        // Validate Medical Checkups Frequency
+        if (_data.MedicalCheckupsFrequency <= 0) {
+          throw ArgumentError(
+              "Medical Checkups Frequency must be a positive number");
+        }
+
+        // Validate Medication Adherence (binary: 0 or 1)
+        _validateBinary(_data.MedicationAdherence, "Medication Adherence");
+
+        // Validate Health Literacy (binary: 0 or 1)
+        _validateBinary(_data.HealthLiteracy, "Health Literacy");
+        break;
+
+      case 8:
+        // Step 8: Symptoms and Quality of Life
+        // Validate Symptoms (binary: 0 or 1 for each symptom)
+        _validateBinary(_data.Edema, "Edema");
+        _validateBinary(_data.FatigueLevels, "Fatigue Levels");
+        _validateBinary(_data.NauseaVomiting, "Nausea/Vomiting");
+        _validateBinary(_data.MuscleCramps, "Muscle Cramps");
+        _validateBinary(_data.Itching, "Itching");
+
+        // Validate Quality of Life Score (numeric: within a reasonable range, e.g., 0 to 10)
+        if (!_inRange(_data.QualityOfLifeScore, 0, 10)) {
+          throw ArgumentError("Quality of Life Score must be between 0 and 10");
+        }
+        break;
+
+      case 9:
+        // Step 9: Medications
+        // Validate NSAIDs Use (binary: 0 or 1)
+        _validateBinary(_data.NSAIDsUse, "NSAIDs Use");
+
+        // Validate Antidiabetic Medications (binary: 0 or 1)
+        _validateBinary(
+            _data.AntidiabeticMedications, "Antidiabetic Medications");
+        break;
+
+      case 10:
+        // Step 10: Additional Health Metrics
+        // Validate Socioeconomic Status (numeric)
+        if (_data.SocioeconomicStatus <= 0) {
+          throw ArgumentError("Socioeconomic Status must be a positive number");
+        }
+
+        // Validate Sleep Quality (numeric: within a reasonable range, e.g., 0 to 10)
+        if (!_inRange(_data.SleepQuality, 0, 10)) {
+          throw ArgumentError("Sleep Quality must be between 0 and 10");
+        }
+
+        // Validate Physical Activity (numeric: within a reasonable range, e.g., 0 to 10)
+        if (!_inRange(_data.PhysicalActivity, 0, 10)) {
+          throw ArgumentError("Physical Activity must be between 0 and 10");
+        }
+
+        // Validate Diet Quality (numeric: within a reasonable range, e.g., 0 to 10)
+        if (!_inRange(_data.DietQuality, 0, 10)) {
+          throw ArgumentError("Diet Quality must be between 0 and 10");
+        }
+
+        // Validate Serum Creatinine (numeric: positive)
+        if (_data.SerumCreatinine <= 0) {
+          throw ArgumentError("Serum Creatinine must be a positive number");
+        }
+
+        // Validate Education Level (numeric: e.g., 0 to 20 for education years)
+        if (_data.EducationLevel < 0 || _data.EducationLevel > 20) {
+          throw ArgumentError("Education Level must be between 0 and 20");
+        }
+
+        // Validate Serum Electrolytes Sodium, Potassium, Calcium, Phosphorus (positive numeric values)
+        if (_data.SerumElectrolytesSodium <= 0) {
+          throw ArgumentError(
+              "Serum Electrolytes Sodium must be a positive number");
+        }
+        if (_data.SerumElectrolytesPotassium <= 0) {
+          throw ArgumentError(
+              "Serum Electrolytes Potassium must be a positive number");
+        }
+        if (_data.SerumElectrolytesCalcium <= 0) {
+          throw ArgumentError(
+              "Serum Electrolytes Calcium must be a positive number");
+        }
+        if (_data.SerumElectrolytesPhosphorus <= 0) {
+          throw ArgumentError(
+              "Serum Electrolytes Phosphorus must be a positive number");
+        }
+
+        // Validate Hemoglobin Levels (positive numeric value)
+        if (_data.HemoglobinLevels <= 0) {
+          throw ArgumentError("Hemoglobin Levels must be a positive number");
+        }
+
+        // Validate Cholesterol Levels (positive numeric values)
+        if (_data.CholesterolTotal <= 0) {
+          throw ArgumentError("Total Cholesterol must be a positive number");
+        }
+        if (_data.CholesterolLDL <= 0) {
+          throw ArgumentError("LDL Cholesterol must be a positive number");
+        }
+        if (_data.CholesterolHDL <= 0) {
+          throw ArgumentError("HDL Cholesterol must be a positive number");
+        }
+        if (_data.CholesterolTriglycerides <= 0) {
+          throw ArgumentError("Triglycerides must be a positive number");
+        }
+
+        // Validate ACR (Albumin-to-Creatinine Ratio), BUN, GFR, Protein in Urine (positive numeric values)
+        if (_data.ACR <= 0) {
+          throw ArgumentError(
+              "Albumin-to-Creatinine Ratio must be a positive number");
+        }
+        if (_data.BUNLevels <= 0) {
+          throw ArgumentError("BUN Levels must be a positive number");
+        }
+        if (_data.GFR <= 0) {
+          throw ArgumentError(
+              "Glomerular Filtration Rate must be a positive number");
+        }
+        if (_data.ProteinInUrine <= 0) {
+          throw ArgumentError("Protein in Urine must be a positive number");
+        }
+        break;
+
+      default:
+        throw ArgumentError("Invalid step number: $step");
+    }
+  }
 
   Future<void> _predict() async {
+    try {
+      // Validate the input before sending
+      _data.validate();
+    } catch (e) {
+      // Show validation error message
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Validation Error'),
+          content: Text(e.toString()),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+      return; // Stop prediction if validation fails
+    }
+
     debugPrint("server...");
     final url = Uri.parse('https://backend-cdk.onrender.com/predict');
 
@@ -90,16 +331,12 @@ class _HomePageState extends State<HomePage>
 
     if (response.statusCode == 200) {
       final result = jsonDecode(response.body);
-      _logRegPrediction = result['Logistic Regression Prediction'].toString();
-      _randForestPrediction = result['Random Forest Prediction'].toString();
-      _gradBoostPrediction = result['Gradient Boosting Prediction'].toString();
+      final message = result['Prediction Message'];
       showDialog(
-        // ignore: use_build_context_synchronously
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Prediction Result'),
-          content: Text(
-              'The predicted: in Log Reg Prediction algo $_logRegPrediction , in rand-forest algo $_randForestPrediction, in grad boost algo $_gradBoostPrediction '),
+          content: Text(message),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -111,7 +348,6 @@ class _HomePageState extends State<HomePage>
     } else {
       debugPrint(response.body);
       showDialog(
-        // ignore: use_build_context_synchronously
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Error'),
@@ -198,6 +434,29 @@ class _HomePageState extends State<HomePage>
                 if (isLastStep) {
                   _predict();
                 } else {
+                  debugPrint(_currentStep.toString());
+                  try {
+                    // Validate the input before sending
+                    validate(_currentStep);
+                  } catch (e) {
+                    debugPrint(e.toString());
+                    // Show validation error message
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Validation Error'),
+                        content: Text(e.toString()),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                    return; // Stop prediction if validation fails
+                  }
+
                   setState(() {
                     _currentStep += 1;
                   });

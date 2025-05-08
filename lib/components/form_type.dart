@@ -1,4 +1,3 @@
-
 class HealthData {
   int Age;
   String Gender; // 'Male', 'Female', 'Other'
@@ -105,6 +104,76 @@ class HealthData {
     required this.NSAIDsUse,
     required this.AntidiabeticMedications,
   });
+  void validate() {
+    if (Age < 0) throw ArgumentError("Age must be ≥ 0");
+    if (SocioeconomicStatus < 1 || SocioeconomicStatus > 5) {
+      throw ArgumentError("SocioeconomicStatus must be between 1 and 5");
+    }
+    if (EducationLevel < 1 || EducationLevel > 5) {
+      throw ArgumentError("EducationLevel must be between 1 and 5");
+    }
+    if (BMI < 0) throw ArgumentError("BMI must be ≥ 0");
+    if (!_binary(Smoking)) throw ArgumentError("Smoking must be 0 or 1");
+    if (!_inRange(AlcoholConsumption, 0, 5)) {
+      throw ArgumentError("AlcoholConsumption must be between 0 and 5");
+    }
+    if (!_inRange(PhysicalActivity, 1, 5)) {
+      throw ArgumentError("PhysicalActivity must be between 1 and 5");
+    }
+    if (!_inRange(DietQuality, 1, 5)) {
+      throw ArgumentError("DietQuality must be between 1 and 5");
+    }
+    if (!_inRange(SleepQuality, 1, 5)) {
+      throw ArgumentError("SleepQuality must be between 1 and 5");
+    }
+    _validateBinary(FamilyHistoryKidneyDisease, 'FamilyHistoryKidneyDisease');
+    _validateBinary(FamilyHistoryHypertension, 'FamilyHistoryHypertension');
+    _validateBinary(FamilyHistoryDiabetes, 'FamilyHistoryDiabetes');
+    _validateBinary(PreviousAcuteKidneyInjury, 'PreviousAcuteKidneyInjury');
+    _validateBinary(UrinaryTractInfections, 'UrinaryTractInfections');
+    if (SystolicBP < 0) throw ArgumentError("SystolicBP must be ≥ 0");
+    if (DiastolicBP < 0) throw ArgumentError("DiastolicBP must be ≥ 0");
+    if (FastingBloodSugar < 0)
+      throw ArgumentError("FastingBloodSugar must be ≥ 0");
+    if (HbA1c < 0) throw ArgumentError("HbA1c must be ≥ 0");
+    if (SerumCreatinine < 0) throw ArgumentError("SerumCreatinine must be ≥ 0");
+    if (BUNLevels < 0) throw ArgumentError("BUNLevels must be ≥ 0");
+    if (GFR < 0) throw ArgumentError("GFR must be ≥ 0");
+    _validateBinary(ProteinInUrine, 'ProteinInUrine');
+    if (ACR < 0) throw ArgumentError("ACR must be ≥ 0");
+    _validateBinary(ACEInhibitors, 'ACEInhibitors');
+    _validateBinary(Diuretics, 'Diuretics');
+    _validateBinary(Statins, 'Statins');
+    _validateBinary(HeavyMetalsExposure, 'HeavyMetalsExposure');
+    _validateBinary(
+        OccupationalExposureChemicals, 'OccupationalExposureChemicals');
+    if (!_inRange(WaterQuality, 1, 5))
+      throw ArgumentError("WaterQuality must be 1–5");
+    if (!_inRange(MedicalCheckupsFrequency, 1, 5))
+      throw ArgumentError("MedicalCheckupsFrequency must be 1–5");
+    if (!_inRange(MedicationAdherence, 1, 5))
+      throw ArgumentError("MedicationAdherence must be 1–5");
+    if (!_inRange(HealthLiteracy, 1, 5))
+      throw ArgumentError("HealthLiteracy must be 1–5");
+    _validateBinary(Edema, 'Edema');
+    if (!_inRange(FatigueLevels, 0, 5))
+      throw ArgumentError("FatigueLevels must be 0–5");
+    _validateBinary(NauseaVomiting, 'NauseaVomiting');
+    _validateBinary(MuscleCramps, 'MuscleCramps');
+    _validateBinary(Itching, 'Itching');
+    if (!_inRange(QualityOfLifeScore, 0, 10))
+      throw ArgumentError("QualityOfLifeScore must be 0–10");
+    _validateBinary(NSAIDsUse, 'NSAIDsUse');
+    _validateBinary(AntidiabeticMedications, 'AntidiabeticMedications');
+  }
+
+  void _validateBinary(int value, String field) {
+    if (!_binary(value)) throw ArgumentError("$field must be 0 or 1");
+  }
+
+  bool _binary(int x) => x == 0 || x == 1;
+
+  bool _inRange(int x, int min, int max) => x >= min && x <= max;
 
   Map<String, dynamic> toJson() {
     return {

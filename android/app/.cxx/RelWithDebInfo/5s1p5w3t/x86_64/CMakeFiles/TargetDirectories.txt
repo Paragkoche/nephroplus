@@ -1,0 +1,2 @@
+D:/parag/nephroplus/android/app/.cxx/RelWithDebInfo/5s1p5w3t/x86_64/CMakeFiles/edit_cache.dir
+D:/parag/nephroplus/android/app/.cxx/RelWithDebInfo/5s1p5w3t/x86_64/CMakeFiles/rebuild_cache.dir

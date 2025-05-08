@@ -1,0 +1,2 @@
+D:/parag/nephroplus/android/app/.cxx/Debug/6f4t1d41/x86/CMakeFiles/edit_cache.dir
+D:/parag/nephroplus/android/app/.cxx/Debug/6f4t1d41/x86/CMakeFiles/rebuild_cache.dir
